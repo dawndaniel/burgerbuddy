@@ -1,0 +1,7 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Burger Buddy logo">
+  <circle cx="60" cy="60" r="57" fill="#2B1717" stroke="#D99A32" stroke-width="4"/>
+  <circle cx="60" cy="60" r="47" fill="none" stroke="#F5E9C9" stroke-width="1.5" stroke-dasharray="2 4"/>
+  <text x="60" y="47" text-anchor="middle" font-family="Anton, sans-serif" font-size="21" fill="#F5E9C9">BURGER</text>
+  <text x="60" y="72" text-anchor="middle" font-family="Anton, sans-serif" font-size="24" fill="#C92525">BUDDY</text>
+  <path d="M32 82 Q60 92 88 82" stroke="#D99A32" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
