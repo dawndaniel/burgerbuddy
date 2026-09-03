@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu | Burger Buddy</title>
+<meta name="description" content="Browse the full Burger Buddy menu — Zinger burgers, crispy wings, fries, add-ons and deals. Order on WhatsApp.">
+<link rel="canonical" href="https://burgerbuddy.pk/menu.html">
+<meta property="og:title" content="Menu | Burger Buddy">
+<meta property="og:description" content="Browse the full Burger Buddy menu — Zinger burgers, crispy wings, fries, add-ons and deals. Order on WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=70">
+<meta name="theme-color" content="#2B1717">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FastFoodRestaurant",
+  "name": "Burger Buddy",
+  "servesCuisine": "Fast Food, Burgers, Wings",
+  "telephone": "+923062767340",
+  "priceRange": "Rs. 100 - Rs. 1900",
+  "openingHours": "18:00-24:00",
+  "areaServed": "Pakistan"
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-small.png" alt="Burger Buddy logo" class="brand-logo">
+        </a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="has-dropdown">
+            <a href="menu.html" class="active">Menu</a>
+            <div class="dropdown">
+              <a href="menu.html#burgers">Burgers</a>
+              <a href="menu.html#wings">Wings</a>
+              <a href="menu.html#fries">Fries</a>
+              <a href="deals.html">Deals</a>
+              <a href="menu.html#addons">Add-ons</a>
+            </div>
+          </li>
+          <li><a href="deals.html">Deals</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn theme-toggle" aria-label="Toggle dark and light mode"><span class="theme-icon">🌙</span></button>
+        <button class="icon-btn" aria-label="Open cart" onclick="openCart()">🛒<span class="cart-count">0</span></button>
+        <a href="menu.html" class="btn btn-primary btn-sm">ORDER NOW</a>
+        <button class="hamburger" aria-label="Open menu" onclick="openMobileNav()">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-close" aria-label="Close menu" onclick="closeMobileNav()">✕</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li class="sub-list">
+        <a href="menu.html#burgers">Burgers</a>
+        <a href="menu.html#wings">Wings</a>
+        <a href="menu.html#fries">Fries</a>
+        <a href="menu.html#addons">Add-ons</a>
+      </li>
+      <li><a href="deals.html">Deals</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+
+  <div class="overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-head">
+      <h3>Your Cart</h3>
+      <button class="cart-close" aria-label="Close cart" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-summary" id="cartSummary"></div>
+
+    <form class="checkout-panel" id="checkoutPanel" onsubmit="placeOrder(event)">
+      <h3 style="margin-bottom:14px;">Your Details</h3>
+      <div class="field">
+        <label for="custName">Name</label>
+        <input id="custName" type="text" required placeholder="Your full name">
+      </div>
+      <div class="field">
+        <label for="custPhone">Phone Number</label>
+        <input id="custPhone" type="tel" required placeholder="03XX-XXXXXXX">
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-opt active" id="opt-delivery" onclick="selectFulfilment('delivery')">Delivery</div>
+        <div class="toggle-opt" id="opt-pickup" onclick="selectFulfilment('pickup')">Pickup</div>
+      </div>
+      <input type="hidden" id="fulfilmentInput" value="delivery">
+      <div class="field" id="addressField">
+        <label for="custAddress">Delivery Address</label>
+        <textarea id="custAddress" placeholder="House #, street, area, city"></textarea>
+      </div>
+      <div class="field" id="locationField">
+        <label>Share Your Location <span style="font-weight:400;color:var(--text-soft);">(optional, helps our rider find you)</span></label>
+        <button type="button" class="btn btn-secondary btn-sm" id="shareLocationBtn" onclick="shareLocation()">📍 Share My Location</button>
+        <p id="locationStatus" style="font-size:.8rem;margin:8px 0 0;color:var(--text-soft);">No location shared yet</p>
+        <input type="hidden" id="custLocationLink" value="">
+      </div>
+      <div class="field">
+        <label for="custNotes">Order Notes (optional)</label>
+        <textarea id="custNotes" placeholder="Extra spicy, no onions, etc."></textarea>
+      </div>
+      <button type="button" class="btn btn-secondary btn-block" style="margin-bottom:10px;" onclick="backToCart()">← Back to Cart</button>
+      <button type="submit" class="btn btn-whatsapp btn-block">PLACE ORDER ON WHATSAPP</button>
+    </form>
+  </aside>
+
+<main id="main">
+  <section class="section" style="padding-top:46px;">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Everything On The Grill</span>
+        <h2>OUR MENU</h2>
+        <p>Every price, every deal, straight off Buddy's board.</p>
+      </div>
+
+      <div class="cat-tabs" role="tablist" aria-label="Menu categories">
+        <button class="cat-tab active" data-cat="all">All</button>
+        <button class="cat-tab" data-cat="burgers">Burgers</button>
+        <button class="cat-tab" data-cat="wings">Wings</button>
+        <button class="cat-tab" data-cat="fries">Fries</button>
+        <button class="cat-tab" data-cat="deals">Deals</button>
+        <button class="cat-tab" data-cat="addons">Add-ons</button>
+      </div>
+
+      <div class="grid grid-4" id="menuGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="deals-note">
+    <div class="container" style="text-align:center;">
+      <h3>Looking for the full deal breakdown?</h3>
+      <p style="max-width:520px;margin:12px auto 20px;">Head over to our dedicated Deals page for the Buddy Deal and Family Buddy bundles.</p>
+      <a href="deals.html" class="btn btn-primary">SEE ALL DEALS</a>
+    </div>
+  </section>
+
+</main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="foot-brand">
+        <div class="brand" style="margin-bottom:6px;">
+          <img src="assets/logo-small.png" alt="Burger Buddy logo" style="height:64px;">
+          </div>
+        <div class="foot-tagline">"SCENE ON, BURGER GONE"</div>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="https://wa.me/923062767340" aria-label="WhatsApp">wa</a>
+          <a href="#" aria-label="TikTok">tt</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="deals.html">Deals</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Order</h4>
+        <ul>
+          <li><a href="https://wa.me/923062767340">WhatsApp</a></li>
+          <li>0306-2767340</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Opening Hours</h4>
+        <ul>
+          <li>06:00 PM &ndash; 12:00 AM</li>
+          <li>Open Daily</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 Burger Buddy. All Rights Reserved.</div>
+  </footer>
+
+
+  <nav class="bottom-nav" aria-label="Mobile quick navigation">
+    <ul>
+      <li><a href="index.html"><span class="icon">🏠</span>Home</a></li>
+      <li><a href="menu.html" style="color:var(--gold)"><span class="icon">🍔</span>Menu</a></li>
+      <li><a href="deals.html"><span class="icon">🏷️</span>Deals</a></li>
+      <li><a href="#" onclick="openCart();return false;"><span class="icon">🛒<span class="bn-count" style="display:none">0</span></span>Cart</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="toast" id="toast"></div>
+  <div class="grain"></div>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
